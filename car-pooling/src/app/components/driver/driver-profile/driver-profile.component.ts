@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../../../services/token-storage.service';
 import {Router} from '@angular/router';
 import { DriverService } from 'src/app/services/driver.service';
-import { Observable } from 'rxjs';
-const uri = 'http://localhost:3000/file/upload';
-
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-driver-profile',
@@ -13,11 +11,11 @@ const uri = 'http://localhost:3000/file/upload';
 })
 export class DriverProfileComponent implements OnInit {
   driver: any;
-  files: File[] = [];
-  downloadURL: Observable<string> | undefined;
-  selectedFile: File = null;
+  files: File = null;
+
 
   constructor(private tokenStorage: TokenStorageService, 
+    private authService: AuthService,
     private driverService: DriverService, 
     private router: Router) { } 
 
@@ -28,34 +26,28 @@ export class DriverProfileComponent implements OnInit {
     console.log(this.driver)
   }
 
-// onFileSelected(event){
-// // this.selectedFile = <File>event.target.files[0];
-// // console.log(this.selectedFile);
-// console.log(event);
-// this.files.push(...event.addedFiles);   //Scape empty array
-// if (!this.files[0]) {
-//   alert('Wrong file');
-// }
-// const file_data = this.files[0];
-// const data = new FormData();
-// data.append('file', file_data);
-// data.append('upload_preset', 'ml_default');
-// data.append('cloud_name', 'dc36tjyia');
-// this.driverService.uploadImage(data).subscribe(image => {
-//   console.log(image.result.url)
-//   this.downloadURL = image.result.url;
-// })
+onFileSelected(event){
+  this.files = event.addedFiles[0];   //Scape empty array
+if (!this.files) {
+  alert('Wrong file');
+}
+}
 
-// }
-// onRemove(event) {
-//   console.log(event);
-//   this.files.splice(this.files.indexOf(event), 1);
-// }
+onRemove(event) {
+  this.files = null;
+}
 
 
-// onUpload(){
-// this.driverService.sendImage(this.downloadURL).subscribe(image =>{
-//   console.log(image, "saved in databse")
-// })
-// }
+onUpload(){
+  const data = new FormData();
+  data.append('file', this.files);
+  data.append('type', 'driver')
+  this.authService.uploadImage(this.driver.id, data).subscribe(image => {
+    this.driver.imageUrl = image.result.url;
+    this.tokenStorage.saveUser(this.driver);
+    console.log(image.result.url)
+  })
+}
+
+
 }

@@ -11,11 +11,12 @@ import { DriverService } from 'src/app/services/driver.service';
   styleUrls: ['./driver.component.scss']
 })
 export class DriverComponent implements OnInit {
+  
   driver: any;
   car:any;
   rides: any[];
   validatingForm: FormGroup;
-  headElements = ['Departure', 'Destination', 'Date', 'Time', 'Seats', 'Status'];
+  headElements = ['Departure', 'Destination','Date', 'Time', 'Seats','Passengers', 'Status'];
   now = Date.now() / 1000 / 3600;
   constructor(private tokenStorageService: TokenStorageService, private router : Router, private rideService: RideService,
               private driverService: DriverService
@@ -23,19 +24,20 @@ export class DriverComponent implements OnInit {
 
   ngOnInit(): void {
     this.driver = this.tokenStorageService.getUser();
-    console.log(this.driver)
+    // console.log(this.driver)
+    this.driverService.getOneCar(this.driver.id).subscribe((car:any) => { 
+      if(!car)this.router.navigate(['car'])
+      this.car= car})
     this.rideService.getDriverRides(this.driver.id).subscribe((rides: any[]) => {
       for(let i = 0; i < rides.length; i++) {
         let time = rides[i].time.split(':').reduce((acc,time) => (60 * acc) + +time);
         rides[i].Date = ((Date.parse(rides[i].date) / 1000) + time) / 3600;
-        console.log(rides[i].Date, this.now)
-        
       }
       console.log(rides)
       this.rides = rides
+    
     })
-    this.driverService.getOneCar(this.driver.id).subscribe((car:any) => {  console.log(car) 
-      this.car= car})
+    
     this.validatingForm = new FormGroup({
       departure: new FormControl('', [Validators.required, Validators.minLength(3)]),
       destination: new FormControl('', [Validators.required, Validators.minLength(3)]),
