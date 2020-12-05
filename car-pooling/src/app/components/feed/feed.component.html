@@ -1,20 +1,20 @@
 
 
 
-  <table Table>
+  <table Table >
     <thead>
       <tr>
-        <th> Name of Driver </th>
-        <th> Departure </th>
-        <th> Destination </th>
-        <th> Time </th>
-        <th> Date </th>
-        <th> Price </th>
-        <th> Seats </th>
-        <th> Reservation </th>
+        <th class="border border-green-600"> Name of Driver </th>
+        <th class="border border-green-600"> Departure </th>
+        <th class="border border-green-600"> Destination </th>
+        <th class="border border-green-600"> Time </th>
+        <th class="border border-green-600"> Date </th>
+        <th class="border border-green-600"> Price </th>
+        <th class="border border-green-600"> Seats </th>
+        <th class="border border-green-600"> Reservation </th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="border-collapse border border-green-800">
       <tr *ngFor="let ride of rides">
         <td >
           <a target="_blank" routerLink="detail/{{ride.Driver.id}}">
@@ -23,19 +23,20 @@
             <mdb-icon fas icon="star" [ngClass]="{'checked': ride.Driver.rating >= i}"></mdb-icon>
             </i>
         </td>
-        <td>{{ride.departure}}</td>
-        <td>{{ride.destination}}</td>
-        <td>{{ride.time}}</td>
-        <td>{{ride.date}}</td>
-        <td>{{ride.price}}</td>
-        <td>{{ride.seats}}</td>
-        <td>
-          <button type="button" mdbBtn color="warning" class="waves-light" data-toggle="modal" data-target="rides"
+        <td class="border border-green-600">{{ride.departure}}</td>
+        <td class="border border-green-600">{{ride.destination}}</td>
+        <td class="border border-green-600">{{ride.time}}</td>
+        <td class="border border-green-600">{{ride.date}}</td>
+        <td class="border border-green-600">{{ride.price}}</td>
+        <td class="border border-green-600">{{ride.seats}}</td>
+        <td class="border border-green-600">
+          
+          <button type="button" mdbBtn color="orange" class="waves-light" data-toggle="modal" data-target="rides"
           (click)="frame.show()" mdbWavesEffect> Reserve </button>
 
           <div mdbModal #frame="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
   aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-notify modal-warning" role="document">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
     <!--Content-->
     <div class="modal-content text-center">
       <!--Header-->
@@ -50,9 +51,9 @@
 
       <!--Footer-->
       <div class="modal-footer justify-content-center">
-        <a mdbBtn color="warning" outline="true" class="waves-effect" (click)="reserve(ride.id)"
+        <a mdbBtn color="red" outline="true" class="waves-effect" (click)="reserve(ride.id)"
           mdbWavesEffect>Yes</a>
-        <a type="button" mdbBtn color="warning" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">No</a>
+        <a type="button" mdbBtn color="red" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">No</a>
       </div>
     </div>
     <!--/.Content-->

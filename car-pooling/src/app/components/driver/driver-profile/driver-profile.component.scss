@@ -20,3 +20,14 @@ a {
     width: auto;
     height: 150%;
 }
+
+
+
+
+#zoom:hover {
+    -ms-transform: scale(1.5); 
+    -webkit-transform: scale(1.5); 
+    transform: scale(1.5); 
+  }
+  
+  

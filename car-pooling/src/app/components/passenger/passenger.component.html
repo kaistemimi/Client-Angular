@@ -3,7 +3,7 @@
 <app-navbar></app-navbar>
         
 
-        <!-- <div
+        <div
         class="absolute top-0 w-full h-full bg-gray-900 bg-no-repeat bg-full"
         style="background-image: url('assets/images/register_bg_2.png');">
         <app-navbar></app-navbar>
@@ -18,13 +18,13 @@
               <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name" style="color: white;">
                 Departure
               </label>
-              <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Departure">
+              <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Departure" formControlName="departure">
             </div>
             <div class="md:w-1/2 px-3">
               <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-last-name" style="color: white;">
                 Destination
               </label>
-              <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="Destination">
+              <input class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-last-name" type="text" placeholder="Destination" formControlName="destination">
             </div>
             <div class="md:w-1/2 px-3 mb-6 md:mb-0">
               <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-first-name" style="color: white;">
@@ -51,12 +51,12 @@
       </div>
         <div *ngIf = "activateResults">
           <app-feed [rides]="results" [user]="user"></app-feed>
-        </div> -->
+        </div>
      
 
 
 
-<div class=" container mt-5" >
+<!-- <div class=" container mt-5" >
   <div class="row " style="margin-top: 200px;">
     <div class="col-3 appearance-none block w-full bg-gray-200 text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-first-name" type="text" placeholder="Departure">
       <ng-select [items]="resultRides"
@@ -94,7 +94,7 @@
 
 <div *ngIf = "results">
   <app-feed [rides]="results" [user]="user"></app-feed>
-</div>
+</div> -->
 
 
 
